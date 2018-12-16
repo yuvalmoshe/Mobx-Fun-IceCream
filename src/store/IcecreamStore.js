@@ -1,9 +1,23 @@
+import { observable, action, computed } from "mobx";
+
 class IceCreamStore {
-    iceCreams = [];
+	@observable iceCreams = [];
+	@computed get iceCreamsCount(){
+		return this.iceCreams.length;
+	}
  
-    addIceCream(flavor ,color) {
-	this.iceCreams.push({ flavor, color });
+    @action addIceCream = (flavor, color, img) => {
+        this.iceCreams.push({ flavor, color, img });
     }
+
+    @action removeIceCream = (i) => {
+        let index = this.iceCreams.indexOf(i);
+        this.iceCreams.splice(index , 1);
+    }
+
+    // @action editIceCream = () => {
+    //     this.iceCreams
+    // }
 }
 
 const store = new IceCreamStore();
